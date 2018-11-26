@@ -1,13 +1,9 @@
----
-layout: '[layout]'
-title: （零）教程开篇絮语及目录
-date: 2018-11-19 14:04:02
-top: true
-tags: 手把手教你玩eos
----
+
+（零）教程开篇絮语及目录
+===================================
 
 # 手把手教你玩eos
-> 我是此系列教程作者，eoswing团队肖南飞,区块链技术开发人员。
+> 我是此系列教程作者，<a href="https://www.eoswing.io" >eoswing团队</a>肖南飞,区块链技术开发人员。
 
 # 0.教程特色
 ## 0.1 零基础入门
@@ -43,24 +39,24 @@ tags: 手把手教你玩eos
 # 1.教程目录
 ## 1.1 初学乍练---EOS开发基础
 
-##### <a href="https://blog.eoswing.io/2018/09/10/eos-tutorial-01/" target="_blank">（一）使用docker搭建eos本地运行环境</a>
-##### <a href="https://blog.eoswing.io/2018/09/13/eos-tutorial-02/" target="_blank">（二）钱包和账户的创建与管理</a>
-##### <a href="https://blog.eoswing.io/2018/09/27/eos-tutorial-03/" target="_blank">（三）使用智能合约创建和发放代币</a>
-##### <a href="https://blog.eoswing.io/2018/10/08/eos-tutorial-04/" target="_blank">（四）编写第一个智能合约Hello_eos</a>
-##### <a href="https://blog.eoswing.io/2018/10/15/eos-tutorial-05/" target="_blank">（五）编写智能合约游戏：三连棋</a>
-##### <a href="https://blog.eoswing.io/2018/10/23/eos-tutorial-06/" target="_blank">（六）架设EOS区块浏览器</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-01.md" target="_blank">（一）使用docker搭建eos本地运行环境</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-02.md" target="_blank">（二）钱包和账户的创建与管理</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-03.md" target="_blank">（三）使用智能合约创建和发放代币</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-04.md" target="_blank">（四）编写第一个智能合约Hello_eos</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-05.md" target="_blank">（五）编写智能合约游戏：三连棋</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-06.md" target="_blank">（六）架设EOS区块浏览器</a>
 
 ## 1.2 牛刀小试---EOS卡牌游戏开发
 
-##### <a href="https://blog.eoswing.io/2018/10/29/eos-tutorial-07/" target="_blank">（七）卡牌游戏第一课：搭建前后端框架</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-07.md" target="_blank">（七）卡牌游戏第一课：搭建前后端框架</a>
 
-##### <a href="https://blog.eoswing.io/2018/11/05/eos-tutorial-08/" target="_blank">（八）卡牌游戏第二课：存储状态和登录</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-08.md" target="_blank">（八）卡牌游戏第二课：存储状态和登录</a>
 
-##### <a href="https://blog.eoswing.io/2018/11/12/eos-tutorial-09/" target="_blank">（九）卡牌游戏第三课：从区块链中读取状态</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-09.md" target="_blank">（九）卡牌游戏第三课：从区块链中读取状态</a>
 
-##### <a href="https://blog.eoswing.io/2018/11/19/eos-tutorial-10/" target="_blank">（十）卡牌游戏第四课：游戏核心组件</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-10.md" target="_blank">（十）卡牌游戏第四课：游戏核心组件</a>
 
-##### <a href="https://blog.eoswing.io/2018/11/26/eos-tutorial-11/" target="_blank">（十一）卡牌游戏第五课：AI部分</a>
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-11.md" target="_blank">（十一）卡牌游戏第五课：AI部分</a>
 
 持续更新中...
 
@@ -69,4 +65,4 @@ tags: 手把手教你玩eos
 eoswing技术团队致力于EOS区块链基础知识传播。EOS开发涉猎知识领域非常广，同时更新迭代非常快。在教程中可能有这样那样的错漏之处，还请读者与我们一起查漏补缺、将系列教程优化的更好。
 
 ## 2.2 请投票给柚翼节点
-如果觉得这系列教程有点意思，请投票给柚翼节点（eoswingdotio）。您的投票是本教程持续更新的动力源泉，谢谢。
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。

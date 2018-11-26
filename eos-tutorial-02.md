@@ -1,12 +1,9 @@
----
-layout: '[layout]'
-title: （二）钱包和账户的创建与管理
-date: 2018-09-13 16:12:02
-tags: 手把手教你玩eos
----
+
+（二）钱包和账户的创建与管理
+===================================
 
 # 手把手教你玩eos
-> 我是此系列教程作者，eoswing团队肖南飞,区块链技术开发人员。
+> 我是此系列教程作者，<a href="https://www.eoswing.io" >eoswing团队</a>肖南飞,区块链技术开发人员。
 
 # 0.引言
 ## 0.1教程概况
@@ -36,7 +33,7 @@ tags: 手把手教你玩eos
 # 1.理解相关概念
 ## 1.1 回顾一下架构图
 再看看上篇教程发的架构图，此图务必反复看，深入理解。
-{% asset_img eost02-01.png 架构图 %}
+![架构图](/images/eost02-01.png "架构图")
 
 钱包其实就是存放公钥-私钥对的加密存储库，由keosd组件负责管理。
 
@@ -48,7 +45,7 @@ cleos可以理解为一个命令行工具。主要作用是keosd组件和nodeos�
 ## 1.2 更深入的理解
 看了上面的是不是感觉有点绕口？
 我将这个架构图，针对账号和钱包之间关系画了一个更详细的解读图。
-{% asset_img eost02-02.png 解读图 %}
+![推荐配置](/images/eost02-02.png "解读图")
 
 先看右边的nodeos账户体系。  
 账户由一个唯一名称来标识，名称的最大长度为12个字符。在账户里有token、智能合约等等资产。  
@@ -73,28 +70,28 @@ cleos可以理解为一个命令行工具。主要作用是keosd组件和nodeos�
 如果你在学习了第一讲后退出了运行环境，关闭了eos镜像。请在进入centos7后，进行如下操作：
 
 ### 启动eos镜像
-{% codeblock lang:Bash %}
+```Bash
     docker run --rm --name eosio -d -p 8888:8888 -p 9876:9876 -v /tmp/work:/work -v /tmp/eosio/data:/mnt/dev/data -v /tmp/eosio/config:/mnt/dev/config eosio/eos-dev  /bin/bash -c "nodeos -e -p eosio --plugin eosio::wallet_api_plugin --plugin eosio::wallet_plugin --plugin eosio::producer_plugin --plugin eosio::history_plugin --plugin eosio::chain_api_plugin --plugin eosio::history_api_plugin --plugin eosio::http_plugin -d /mnt/dev/data --config-dir /mnt/dev/config --http-server-address=0.0.0.0:8888 --access-control-allow-origin=* --contracts-console --http-validate-host=false"
-{% endcodeblock %}
+```
 
 ### 进入docker容器
-{% codeblock lang:Bash %}
+```Bash
     docker exec -it eosio /bin/bash
-{% endcodeblock %}
+```
 
 ### 验证cleos
-{% codeblock lang:Bash %}
+```Bash
 	cleos --help
-{% endcodeblock %}
+```
 
 ## 2.2 创建钱包
 ### 创建第一个钱包
-{% codeblock lang:Bash %}
+```Bash
     cleos wallet create --to-console
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost02-03.png 创建钱包 %}
+![创建钱包](/images/eost02-03.png "创建钱包")
 
 现在keosd已经为我们创建了一个名称为default的钱包，并且生成了钱包的秘钥："PW5J3SQJefLLcFj6WbourV8tthPhr52Xvsr9d2XYs4UY9RpBGzjqy"。
 
@@ -105,24 +102,24 @@ cleos可以理解为一个命令行工具。主要作用是keosd组件和nodeos�
 
 ### 再创建一个钱包
 创建钱包时可以在后面加上 -n 的参数，指定钱包名称。下面我们创建一个名称为xiao的钱包。  
-{% codeblock lang:Bash %}
+```Bash
     cleos wallet create -n xiao --to-console
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost02-04.png 创建钱包xiao %}
+![创建钱包xiao](/images/eost02-04.png "创建钱包xiao")
 
 
 钱包xiao的密码就是"PW5JzuEJJD3iEyN6uE36A23sGCtFRSs3ax7UUbdBrWZgFpS1yQxBU"。
 
 ### 查看钱包列表
 看一下我们刚刚创建的两个钱包:
-{% codeblock lang:Bash %}
+```Bash
     cleos wallet list
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost02-05.png 查看钱包列表 %}
+![查看钱包列表](/images/eost02-05.png "查看钱包列表")
 
 细心的朋友会发现两个钱包中，xiao后面有个"\*"号，而default后面没有"\*"号。  
 钱包后面这个星号（\*）很重要，代表着相应的钱包已解锁。这说明xiao钱包处于解锁状态，而default钱包则处于锁定状态。
@@ -132,20 +129,20 @@ cleos可以理解为一个命令行工具。主要作用是keosd组件和nodeos�
 ## 2.3 钱包的锁定与解锁
 ### 钱包的锁定
 我们锁定xiao钱包:
-{% codeblock lang:Bash %}
+```Bash
     cleos wallet lock -n xiao
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost02-06.png 锁定xiao钱包 %}
+![锁定xiao钱包](/images/eost02-06.png "锁定xiao钱包")
 
 再次查看钱包列表:
-{% codeblock lang:Bash %}
+```Bash
     cleos wallet list
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost02-07.png 查看钱包列表2 %}
+![查看钱包列表2](/images/eost02-07.png "查看钱包列表2")
 
 可以看到，xiao钱包后面的星号（\*）已经没有了，已变为锁定状态。
 
@@ -153,74 +150,74 @@ cleos可以理解为一个命令行工具。主要作用是keosd组件和nodeos�
 
 ### 钱包的解锁
 下面我们解锁xiao钱包：
-{% codeblock lang:Bash %}
+```Bash
     cleos wallet unlock -n xiao
-{% endcodeblock %}
+```
 
 回车后，会提示我们输入密码（password）。输入正确密码后，解锁xiao钱包。
-{% asset_img eost02-08.png 解锁xiao钱包 %}
+![解锁xiao钱包](/images/eost02-08.png "解锁xiao钱包")
 
 >在这里为了演示方便，我采用了加"--password"参数附加密码的方式。但在生产环境中不建议如此，因为会导致密码记录到命令行历史记录中。
 
 再次查看钱包列表:
-{% codeblock lang:Bash %}
+```Bash
     cleos wallet list
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost02-09.png 查看钱包列表3 %}
+![查看钱包列表3](/images/eost02-09.png "查看钱包列表3")
 
 可以看到，xiao钱包后面出现星号（\*），已变为解锁状态。
 
 # 3 生成和导入公钥-私钥对
 ## 3.1 生成公钥-私钥对
 生成两个公钥/私钥对。连续输入两次命令:
-{% codeblock lang:Bash %}
+```Bash
     cleos create key
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost02-10.png 生成秘钥 %}
+![生成秘钥](/images/eost02-10.png "生成秘钥")
 
 ## 3.2 导入公钥-私钥对到钱包
 > 如果xiao钱包还没解锁，记得先解锁。
 
 将上面生成的两个公钥-私钥对都导入xiao钱包：
-{% codeblock lang:Bash %}
+```Bash
     cleos wallet import -n xiao --private-key XXXXXXXXXXXXXXX(上面生成的private key)
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost02-11.png 导入私钥1 %}
+![导入私钥1](/images/eost02-11.png "导入私钥1")
 
-{% asset_img eost02-12.png 导入私钥2 %}
+![导入私钥2](/images/eost02-12.png "导入私钥2")
 
 ## 3.3 查看导入钱包的公钥-私钥对
 只查看公钥：
-{% codeblock lang:Bash %}
+```Bash
 	cleos wallet keys
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost02-13.png 查看钥1 %}
+![查看钥1](/images/eost02-13.png "查看钥1")
 
 输入钱包密码，查看公钥-私钥对:
-{% codeblock lang:Bash %}
+```Bash
 	cleos wallet private-keys -n xiao --password PW5JzuEJJD3iEyN6uE36A23sGCtFRSs3ax7UUbdBrWZgFpS1yQxBU
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost02-14.png 查看钥2 %}
+![查看钥2](/images/eost02-14.png "查看钥2")
 
 ## 3.4 备份钱包
 
 钱包文件默认存放在~/eosio-wallet文件夹中。
-{% codeblock lang:Bash %}
+```Bash
 	cd ~/eosio-wallet && ls
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost02-15.png 钱包文件地址 %}
+![钱包文件地址](/images/eost02-15.png "钱包文件地址")
 
 可以看到default.wallet和xiao.wallet两个钱包文件。
 
@@ -230,9 +227,9 @@ cleos可以理解为一个命令行工具。主要作用是keosd组件和nodeos�
 # 4 创建和管理账户
 ## 4.1 命令行解读
 eos的新账户需要有原有的账户创建。创建命令行格式如下:
-{% codeblock lang:Bash %}
+```Bash
 	cleos create account authorizing_account NEW_ACCOUNT OWNER_KEY ACTIVE_KEY
-{% endcodeblock %}
+```
 
 - authorizing_account 是为帐户创建提供资金的帐户的名称。
 - new_account 是您要创建的帐户的名称。
@@ -253,29 +250,29 @@ eosio帐户是用于引导EOSIO节点的特殊帐户。
 > 同时，记得解锁xiao钱包
 
 首先，需要将默认账号eosio的私钥导入xiao钱包：
-{% codeblock lang:Bash %}
+```Bash
 	cleos wallet import -n xiao --private-key  5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost02-16.png eosio导入私钥 %}
+![eosio导入私钥](/images/eost02-16.png "eosio导入私钥")
 
 然后，用初始eosio账户来创建新帐户xiaoaccount：
-{% codeblock lang:Bash %}
+```Bash
 	cleos create account -x 1000 eosio xiaoaccount EOS6FiGRKoJsE1YwwqnQ2TWxV3An1tcwiL5X6H1S75Mr3ijjCtDsh EOS5vfNsEWhxwuzxts7Mg29gEQW3qNibb4FUvn7pWcppNJm783a95
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost02-17.png 创建新帐户 %}
+![创建新帐户](/images/eost02-17.png "创建新帐户")
 
 
 ## 4.3 查看账户信息
-{% codeblock lang:Bash %}
+```Bash
 	cleos get account xiaoaccount -j
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost02-18.png 查看账户信息 %}
+![查看账户信息](/images/eost02-18.png "查看账户信息")
 
 至此，xiaoaccount账户创建成功。
 
@@ -285,4 +282,7 @@ eosio帐户是用于引导EOSIO节点的特殊帐户。
 
 - 钱包与账户: https://developers.eos.io/eosio-nodeos/docs/learn-about-wallets-keys-and-accounts-with-cleos
 
-# 下一篇：<a href="https://blog.eoswing.io/2018/09/27/eos-tutorial-03/" target="_blank">（三）使用智能合约创建和发放代币</a>
+## 请投票给柚翼节点
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。
+
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-03.md" target="_blank">（三）使用智能合约创建和发放代币</a>

@@ -1,12 +1,9 @@
----
-layout: '[layout]'
-title: （七）卡牌游戏第一课：搭建前后端框架
-date: 2018-10-29 20:45:02
-tags: 手把手教你玩eos
----
+
+（七）卡牌游戏第一课：搭建前后端框架
+===================================
 
 # 手把手教你玩eos 
-> 我是此系列教程作者，eoswing团队肖南飞,区块链技术开发人员。
+> 我是此系列教程作者，<a href="https://www.eoswing.io" >eoswing团队</a>肖南飞,区块链技术开发人员。
 
 # 0.引言
 ## 0.1教程概况
@@ -34,7 +31,7 @@ tags: 手把手教你玩eos
 此项目来源于eosio官网:
 https://battles.eos.io/main
 
-{% asset_img eost07-00.png 官网截图 %}
+![](/images/eost07-00.png "官网截图")
 
 本项目大体分为智能合约和前端两个部分。
 
@@ -45,58 +42,58 @@ EOSIO智能合约采用C++编写。不过，如我们在第4篇教程介绍智�
 ## 1.2 进入docker容器
 ### 下载容器
 
-{% codeblock lang:Bash %}
+```Bash
 	docker pull eosio/eos-dev:v1.4.1
-{% endcodeblock %}
+```
 
-{% asset_img eost07-01.png 下载容器 %}
+![](/images/eost07-01.png "下载容器")
 
 ### 建立项目文件夹
 
-{% codeblock lang:Bash %}
+```Bash
 	mkdir /eosapp
 	mkdir /eosapp/contracts
 	mkdir /eosapp/contracts/cardgame
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost07-02.png 建立项目文件夹 %}
+![](/images/eost07-02.png "建立项目文件夹")
 
 ### 配置容器
 
-{% codeblock lang:Bash %}
+```Bash
 	docker run -it -d --net=host --rm --name eosdev -v /eosapp:/eos-work eosio/eos-dev:v1.4.1 /bin/bash
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost07-03.png 配置容器 %}
+![](/images/eost07-03.png "配置容器")
 
 ### 进入docker容器
 
-{% codeblock lang:Bash %}
+```Bash
 	docker exec -it eosdev /bin/bash
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost07-04.png 进入docker容器 %}
+![](/images/eost07-04.png "进入docker容器")
 
 # 2 构建后端智能合约代码框架
 ## 创建智能合约的3个文件
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/contracts/cardgame
 
 	touch cardgame.hpp
 	touch cardgame.cpp
 	touch gameplay.cpp
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost07-05.png 创建智能合约的3个文件 %}	
+![](/images/eost07-05.png "创建智能合约的3个文件")	
 
 三个文件分别为：
 
@@ -107,13 +104,13 @@ EOSIO智能合约采用C++编写。不过，如我们在第4篇教程介绍智�
 
 ## 编码cardgame.hpp
 
-{% codeblock lang:Bash %}
+```Bash
 	vi cardgame.hpp
-{% endcodeblock %}
+```
 
 输入如下代码：
 
-{% codeblock lang:C %}
+```C
 	#include <eosiolib/eosio.hpp>
 
 	using namespace std;
@@ -124,37 +121,37 @@ EOSIO智能合约采用C++编写。不过，如我们在第4篇教程介绍智�
 	    cardgame( account_name self ):contract(self){}
 	
 	};
-{% endcodeblock %}
+```
 
 输入:wq 保存退出
 
 ## 编码gameplay.cpp
 
-{% codeblock lang:Bash %}
+```Bash
 	vi gameplay.cpp
-{% endcodeblock %}
+```
 
 输入如下代码：
 
-{% codeblock lang:C %}
+```C
 	#include "cardgame.hpp"
-{% endcodeblock %}
+```
 
 输入:wq 保存退出
 
 ## 编码cardgame.cpp
 
-{% codeblock lang:Bash %}
+```Bash
 	vi cardgame.cpp
-{% endcodeblock %}
+```
 
 输入如下代码：
 
-{% codeblock lang:C %}
+```C
 	#include "gameplay.cpp"
 
 	EOSIO_ABI(cardgame, BOOST_PP_SEQ_NIL)
-{% endcodeblock %}
+```
 
 输入:wq 保存退出
 
@@ -163,7 +160,7 @@ EOSIO智能合约采用C++编写。不过，如我们在第4篇教程介绍智�
 ## 安装node
 中间遇到[y/n]时，直接输入 y 即可
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work
 	curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 	apt-get install -y nodejs
@@ -171,42 +168,42 @@ EOSIO智能合约采用C++编写。不过，如我们在第4篇教程介绍智�
 	npm install n -g
 	n stable
 	npm i -g pm2
-{% endcodeblock %}
+```
 
 ## 构建前端
 
-{% codeblock lang:Bash %}	
+```Bash	
 	npm init react-app frontend
 	cd frontend
 	npm start
-{% endcodeblock %}
+```
 
 在浏览器中输入服务器网址，我的是http://47.75.214.239:3000/，查看：
 
-{% asset_img eost07-06.png 查看网址1 %}	
+![](/images/eost07-06.png "查看网址1")	
 
 
 ## 修改文件夹代码组织
 
 ### 清空src文件夹中的文件
 
-{% codeblock lang:Bash %}
+```Bash
 	cd src
 	rm *
-{% endcodeblock %}
+```
 
 ### 添加components文件夹及相关代码	
 
-{% codeblock lang:Bash %}	
+```Bash	
 	mkdir components
 	mkdir ./components/App
 
 	vi ./components/App/App.jsx
-{% endcodeblock %}
+```
 
 输入如下代码：
 
-{% codeblock lang:js %}	
+```js")	
 	import React, { Component } from 'react';
 	
 	class App extends Component {
@@ -222,50 +219,50 @@ EOSIO智能合约采用C++编写。不过，如我们在第4篇教程介绍智�
 	}
 	
 	export default App;
-{% endcodeblock %}
+```
 	
 输入:wq 保存退出
 
-{% codeblock lang:Bash %}
+```Bash
 	vi ./components/App/index.js
-{% endcodeblock %}
+```
 
 输入如下代码:
 
-{% codeblock lang:js %}
+```js")
 	import App from './App';
 
 	export default App;
-{% endcodeblock %}
+```
 
 输入:wq 保存退出
 
-{% codeblock lang:Bash %}
+```Bash
 	vi ./components/index.js
-{% endcodeblock %}
+```
 
 输入如下代码:
 
-{% codeblock lang:js %}
+```js")
 	import App from './App';
 
 	export {
 	  App,
 	}
-{% endcodeblock %}
+```
 
 输入:wq 保存退出	
 
 
 ### 修改src/index.js文件
 
-{% codeblock lang:Bash %}
+```Bash
 	vi index.js
-{% endcodeblock %}
+```
 
 删除默认代码，输入如下代码：
 
-{% codeblock lang:js %}
+```js")
 	import React from 'react';
 	import ReactDOM from 'react-dom';
 	import { App } from './components';
@@ -274,31 +271,31 @@ EOSIO智能合约采用C++编写。不过，如我们在第4篇教程介绍智�
 	  <App />,
 	  document.getElementById('root')
 	);
-{% endcodeblock %}
+```
 
 输入:wq 保存退出	
 
 #### 最终文件夹结构如下：
 
-{% codeblock lang:Bash %}
+```Bash
 	apt-get install tree
 	tree
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost07-07.png 文件夹结构 %}	
+![](/images/eost07-07.png "文件夹结构")	
 
 ### 再次运行前端
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/frontend
 	npm start
-{% endcodeblock %}
+```
 
 输入网址查看：
 
-{% asset_img eost07-08.png 查看网址2 %}	
+![](/images/eost07-08.png "查看网址2")	
 
 # 4 后记
 ## 延伸阅读
@@ -306,4 +303,7 @@ EOSIO智能合约采用C++编写。不过，如我们在第4篇教程介绍智�
 
 - EOS官方游戏开发第一课: https://battles.eos.io/tutorial/lesson1/chapter1	
 
-# 下一篇：<a href="https://blog.eoswing.io/2018/11/05/eos-tutorial-08/" target="_blank">（八）卡牌游戏第二课：存储状态和登录</a>
+## 请投票给柚翼节点
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。
+
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-08.md" target="_blank">（八）卡牌游戏第二课：存储状态和登录</a>

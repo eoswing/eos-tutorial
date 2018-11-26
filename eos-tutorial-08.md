@@ -1,12 +1,9 @@
----
-layout: '[layout]'
-title: （八）卡牌游戏第二课：存储状态和登录
-date: 2018-11-5 22:20:02
-tags: 手把手教你玩eos
----
+
+（八）卡牌游戏第二课：存储状态和登录
+===================================
 
 # 手把手教你玩eos 
-> 我是此系列教程作者，eoswing团队肖南飞,区块链技术开发人员。
+> 我是此系列教程作者，<a href="https://www.eoswing.io" >eoswing团队</a>肖南飞,区块链技术开发人员。
 
 # 0.引言
 ## 0.1教程概况
@@ -41,15 +38,15 @@ tags: 手把手教你玩eos
 
 ### 进入开发环境容器
 
-{% codeblock lang:Bash %}
+```Bash
 	docker exec -it eosdev /bin/bash
-{% endcodeblock %}
+```
 
 ### 进入智能合约文件夹
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/contracts/cardgame
-{% endcodeblock %}
+```
 
 # 2 智能合约代码编写
 
@@ -57,9 +54,9 @@ tags: 手把手教你玩eos
 
 打开cardgame.hpp
 
-{% codeblock lang:Bash %}
+```Bash
 	vi cardgame.hpp
-{% endcodeblock %}
+```
 
 我们要在cardgame.hpp中创建一个user_info来存储以下玩家信息：
 
@@ -71,7 +68,7 @@ tags: 手把手教你玩eos
 
 在原有代码基础上输入代码，更新如下：
 
-{% codeblock lang:C %}	
+```C	
 	#include <eosiolib/eosio.hpp>
 
 	using namespace std;
@@ -99,7 +96,7 @@ tags: 手把手教你玩eos
 	    void login(account_name username);
 	
 	};
-{% endcodeblock %}
+```
 
 输入:wq 保存退出
 
@@ -107,9 +104,9 @@ tags: 手把手教你玩eos
 
 打开cardgame.cpp
 
-{% codeblock lang:Bash %}
+```Bash
 	vi cardgame.cpp
-{% endcodeblock %}
+```
 
 在这个代码文件里，我们要编写login动作的具体实现。
 
@@ -119,7 +116,7 @@ tags: 手把手教你玩eos
 
 在原有代码基础上输入代码，更新如下：
 
-{% codeblock lang:C %}
+```C
 	#include "gameplay.cpp"
 	
 	void cardgame::login(account_name username) {
@@ -136,7 +133,7 @@ tags: 手把手教你玩eos
 	}
 	
 	EOSIO_ABI(cardgame, (login))
-{% endcodeblock %}
+```
 
 输入:wq 保存退出
 
@@ -151,105 +148,105 @@ tags: 手把手教你玩eos
 http://faucet.cryptokylin.io/create_account?new_account_name
 new_account_name 就是你要创建的账号名。在这里我使用123123gogogo
 
-{% asset_img eost08-04.png 创建一个账号 %}
+![](/images/eost08-04.png "创建一个账号")
 
 记下账号的两个公私钥对。
 
 再通过水龙头，给账号领一点测试币。(运行一次发100EOS,24小时内可以运行10次)
 http://faucet.cryptokylin.io/get_token?your_account_name
 
-{% asset_img eost08-05.png 领一点测试币 %}
+![](/images/eost08-05.png "领一点测试币")
 
 在EOS区块浏览器中查看下麒麟网的账号
 https://eospark.com/Kylin/account/your_account_name
 
-{% asset_img eost08-06.png 查看下麒麟网的账号 %}
+![](/images/eost08-06.png "查看下麒麟网的账号")
 
 ### 编译智能合约
 
 #### 编译wast文件
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/contracts/cardgame
 
 	eosiocpp -o cardgame.wast cardgame.cpp
 	
 	ll
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost08-07.png 编译wast文件 %}
+![](/images/eost08-07.png "编译wast文件")
 
 虽然编译提示使用eosio.cdt工具，但是官方的源文件还是基于传统的eosiocpp。所以还是采用了eosiocpp编译。
 
 #### 编译abi文件
 
-{% codeblock lang:Bash %}
+```Bash
 	eosiocpp -g cardgame.abi cardgame.cpp
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost08-08.png 编译abi文件 %}
+![](/images/eost08-08.png "编译abi文件")
 
 ### 部署智能合约
 
 #### 创建钱包
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos wallet create -n gamewallet --to-console
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost08-09.png 创建钱包 %}
+![](/images/eost08-09.png "创建钱包")
 
 #### 导入账号私钥
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos wallet import -n gamewallet
-{% endcodeblock %}
+```
 
 回车后，再输入active权限私钥。
 命令行输出如下：
 
-{% asset_img eost08-10.png 导入账号私钥 %}
+![](/images/eost08-10.png "导入账号私钥")
 
 
 ### 购买点资源
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos -u https://api-kylin.eosasia.one system delegatebw 123123gogogo 123123gogogo "40.0000 EOS" "40.0000 EOS"
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost08-11.png 购买点资源1 %}
+![](/images/eost08-11.png "购买点资源1")
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos -u https://api-kylin.eosasia.one system buyram 123123gogogo 123123gogogo "900 EOS"
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost08-12.png 购买点资源2 %}
+![](/images/eost08-12.png "购买点资源2")
 
 ### 部署智能合约
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos -u https://api-kylin.eosasia.one set contract 123123gogogo /eos-work/contracts/cardgame -p 123123gogogo@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost08-13.png 部署智能合约 %}
+![](/images/eost08-13.png "部署智能合约")
 
 ### 在区块浏览器中查看合约
 
 输入网址：https://eospark.com/Kylin/contract/123123gogogo 查看合约情况。
 
-{% asset_img eost08-14.png 查看合约 %}
+![](/images/eost08-14.png "查看合约")
 
 至此，后端的合约部署完成。
 
@@ -258,35 +255,35 @@ https://eospark.com/Kylin/account/your_account_name
 ## 3.1 相关准备
 ### 清理前端文件夹
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work
 	rm -rf ./frontend
-{% endcodeblock %}
+```
 
 ###下载源文件
 
-{% codeblock lang:Bash %}	
+```Bash	
 	apt-get install subversion
 
 	svn checkout https://github.com/EOSIO/eosio-card-game-repo/branches/lesson-2/frontend
-{% endcodeblock %}
+```
 
 ### 安装相关库文件
 
-{% codeblock lang:Bash %}	
+```Bash	
 	cd frontend
 	npm update
-{% endcodeblock %}
+```
 
 ### 测试一下
 
-{% codeblock lang:Bash %}
+```Bash
 	npm start
-{% endcodeblock %}
+```
 
 在浏览器中输入服务器网址查看：
 
-{% asset_img eost08-01.png 网址查看 %}
+![](/images/eost08-01.png "网址查看")
 
 现在还只能看看，里面还有配置没处理好。
 在命令行中输入ctrl+c,退出。
@@ -303,57 +300,57 @@ https://eospark.com/Kylin/account/your_account_name
 
 ### 代码框架结构
 
-{% codeblock lang:Bash %}
+```Bash
 	cd src
 	tree -d
-{% endcodeblock %}
+```
 
 可以看到代码结构如下：
 
-{% asset_img eost08-02.png 代码结构 %}
+![](/images/eost08-02.png "代码结构")
 
 其中，在components文件夹下，Login和Game分别是登录页面和游戏主页面。
 
 这个运行的流程如下图：
 
-{% asset_img eost08-03.png 代码流程 %}
+![](/images/eost08-03.png "代码流程")
 
 ### 修改配置参数
 
-{% codeblock lang:Bash %}
+```Bash
 	 cd /eos-work/frontend
 	 vi .env
-{% endcodeblock %}
+```
 
 修改参数如下：
 
-{% codeblock lang:Bash %}
+```Bash
 	REACT_APP_EOS_CONTRACT_NAME="123123gogogo"
 	REACT_APP_EOS_HTTP_ENDPOINT="https://api-kylin.eosasia.one"
-{% endcodeblock %}
+```
 
 :wq保存退出
 
 ## 3.3 运行测试
 
-{% codeblock lang:Bash %}
+```Bash
 	npm start
-{% endcodeblock %}
+```
 
 在浏览器中输入网址查看。
 同时在麒麟网上按照上面的步骤申请一个玩家账号。
 
 我申请了一个cardgametest账号
 
-{% asset_img eost08-15.png 网址查看1 %}
+![](/images/eost08-15.png "网址查看1")
 
 输入正确的账号名和私钥key后，点击按钮，成功进入游戏主页面，看到welcome!
 
-{% asset_img eost08-16.png 网址查看2 %}
+![](/images/eost08-16.png "网址查看2")
 
 输入错误的账号名或者key后，点击按钮，进入失败并反馈相关信息。
 
-{% asset_img eost08-17.png 网址查看3 %}
+![](/images/eost08-17.png "网址查看3")
 	
 # 4 后记
 ## 延伸阅读
@@ -361,6 +358,8 @@ https://eospark.com/Kylin/account/your_account_name
 
 - EOS官方游戏开发第二课: https://battles.eos.io/tutorial/lesson2/chapter1	
 
-# 下一篇：<a href="https://blog.eoswing.io/2018/11/12/eos-tutorial-09/" target="_blank">（九）卡牌游戏第三课：从区块链中读取状态</a>
+## 请投票给柚翼节点
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。
 
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-09.md" target="_blank">（九）卡牌游戏第三课：从区块链中读取状态</a>
 

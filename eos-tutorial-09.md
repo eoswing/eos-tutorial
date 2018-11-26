@@ -1,12 +1,8 @@
----
-layout: '[layout]'
-title: （九）卡牌游戏第三课：从区块链中读取状态
-date: 2018-11-12 22:10:02
-tags: 手把手教你玩eos
----
+（九）卡牌游戏第三课：从区块链中读取状态
+===================================
 
 # 手把手教你玩eos 
-> 我是此系列教程作者，eoswing团队肖南飞,区块链技术开发人员。
+> 我是此系列教程作者，<a href="https://www.eoswing.io" >eoswing团队</a>肖南飞,区块链技术开发人员。
 
 # 0.引言
 ## 0.1教程概况
@@ -36,21 +32,21 @@ tags: 手把手教你玩eos
 
 整个流程如下图所示：
 
-{% asset_img eost09-01.png 流程图 %}
+![](/images/eost09-01.png "流程图")
 
 ## 1.2 准备工作
 
 ### 进入开发环境容器
 
-{% codeblock lang:Bash %}
+```Bash
 	docker exec -it eosdev /bin/bash
-{% endcodeblock %}
+```
 
 ### 进入前端文件夹
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/frontend/src
-{% endcodeblock %}
+```
 
 # 2 代码编写
 
@@ -58,13 +54,13 @@ tags: 手把手教你玩eos
 
 打开负责与后端区块链通信的ApiService.js
 
-{% codeblock lang:Bash %}
+```Bash
 	vi ./services/ApiService.js
-{% endcodeblock %}
+```
 
 在代码中添加getUserByName()和getCurrentUser()两个函数:
 
-{% codeblock lang:C %}		
+```C		
 	class ApiService {
 
 	//===添加getCurrentUser()函数===
@@ -106,7 +102,7 @@ tags: 手把手教你玩eos
 	//======
 	
 	}
-{% endcodeblock %}	
+```	
 
 ## 2.2 编写显示玩家信息的组件
 
@@ -114,21 +110,21 @@ tags: 手把手教你玩eos
 
 首先，下载图片素材到images文件夹
 
-{% codeblock lang:Bash %}
+```Bash
 	cd ./components/Game/components/PlayerProfile/
 	
 	svn checkout https://github.com/EOSIO/eosio-card-game-repo/branches/lesson-3/frontend/src/components/Game/components/PlayerProfile/images
-{% endcodeblock %}
+```
 
 创建PlayerProfile.jsx
 
-{% codeblock lang:Bash %}
+```Bash
 	vi PlayerProfile.jsx
-{% endcodeblock %}
+```
 
 输入代码：
 
-{% codeblock lang:C %}	
+```C	
 	import React, { Component } from 'react';
 	import { Button } from 'components';
 	
@@ -164,51 +160,51 @@ tags: 手把手教你玩eos
 	}
 	
 	export default PlayerProfile;
-{% endcodeblock %}
+```
 
 创建index.js
 
-{% codeblock lang:Bash %}
+```Bash
 	vi index.js
-{% endcodeblock %}
+```
 
 输入代码：
 
-{% codeblock lang:C %}	
+```C	
 	import './PlayerProfile.css';
 	import PlayerProfile from './PlayerProfile';
 	export default PlayerProfile;
-{% endcodeblock %}
+```
 
 ## 2.3 添加调用逻辑代码
 
 回到上级目录，创建组件的index.js
 
-{% codeblock lang:Bash %}
+```Bash
 	cd ..
 	vi index.js
-{% endcodeblock %}
+```
 	
 输入代码：
 
-{% codeblock lang:C %}	
+```C	
 	import PlayerProfile from './PlayerProfile';
 
 	export {
 	  PlayerProfile,
 	}
-{% endcodeblock %}
+```
 	
 再回到Game目录下，在Game.jsx中增加代码块
 
-{% codeblock lang:Bash %}
+```Bash
 	cd ..
 	vi Game.jsx
-{% endcodeblock %}
+```
 	
 修改代码如下：
 
-{% codeblock lang:C %}	
+```C	
 	// React core
 	import React, { Component } from 'react';
 	import { connect } from 'react-redux';
@@ -271,20 +267,20 @@ tags: 手把手教你玩eos
 	
 	// Export a redux connected component
 	export default connect(mapStateToProps, mapDispatchToProps)(Game);
-{% endcodeblock %}
+```
 
 再到App文件夹下，修改App.jsx
 
-{% codeblock lang:Bash %}
+```Bash
 	cd ../App
 
 	vi App.jsx
-{% endcodeblock %}
+```
 	
 	
 此次修改如下，注意对比前后差别。
 
-{% codeblock lang:C %}	
+```C	
 	// React core
 	import React, { Component } from 'react';
 	import { connect } from 'react-redux';
@@ -346,27 +342,27 @@ tags: 手把手教你玩eos
 	
 	// Export a redux connected component
 	export default connect(mapStateToProps, mapDispatchToProps)(App);
-{% endcodeblock %}
+```
 
 # 3 测试代码
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/frontend
 
 	npm start
-{% endcodeblock %}
+```
 
 因为这次会读取缓存信息。所以注意先清除下浏览器缓存，或者换一个浏览器。
 如果没清除缓存的话，会自动跳到玩家信息页面。
 
 在浏览器中输入网址查看：
 
-{% asset_img eost09-02.png 输入网址查看1 %}
+![](/images/eost09-02.png "输入网址查看1")
 
 输入正确的账号名和私钥后，登录可以看到当前玩家信息。
 由于我们还没有比赛，输赢的数据都是零。
 
-{% asset_img eost09-03.png 输入网址查看2 %}
+![](/images/eost09-03.png "输入网址查看2")
 
 # 4 后记
 ## 延伸阅读
@@ -374,4 +370,7 @@ tags: 手把手教你玩eos
 
 - EOS官方游戏开发第三课: https://battles.eos.io/tutorial/lesson3/chapter1	
 
-# 下一篇：<a href="https://blog.eoswing.io/2018/11/19/eos-tutorial-10/" target="_blank">（十）卡牌游戏第四课：游戏核心组件</a>
+## 请投票给柚翼节点
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。
+
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-10.md" target="_blank">（十）卡牌游戏第四课：游戏核心组件</a>

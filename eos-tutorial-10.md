@@ -1,12 +1,9 @@
----
-layout: '[layout]'
-title: （十）卡牌游戏第四课：游戏核心组件
-date: 2018-11-19 21:10:02
-tags: 手把手教你玩eos
----
+
+（十）卡牌游戏第四课：游戏核心组件
+===================================
 
 # 手把手教你玩eos 
-> 我是此系列教程作者，eoswing团队肖南飞,区块链技术开发人员。
+> 我是此系列教程作者，<a href="https://www.eoswing.io" >eoswing团队</a>肖南飞,区块链技术开发人员。
 
 # 0.引言
 ## 0.1教程概况
@@ -41,7 +38,7 @@ tags: 手把手教你玩eos
 
 整个流程如下图所示：
 
-{% asset_img eost10-00.png 流程图 %}
+![](/images/eost10-00.png "流程图")
 
 ## 1.2 游戏规则
 
@@ -69,27 +66,27 @@ tags: 手把手教你玩eos
 
 五种元素类型分别是：
 
-{% asset_img eost10-01.png 五种元素类型 %}
+![](/images/eost10-01.png "五种元素类型")
 
 
 卡片类型是元素类型和攻击力的组合。让我们看一下牌组中的所有牌：
 
-{% asset_img eost10-02.png 牌组中的所有牌 %}
+![](/images/eost10-02.png "牌组中的所有牌")
 
 
 ## 1.3 准备工作
 
 ### 进入开发环境容器
 
-{% codeblock lang:Bash %}
+```Bash
 	docker exec -it eosdev /bin/bash
-{% endcodeblock %}
+```
 
 ### 进入后端智能合约文件夹
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/contracts/cardgame
-{% endcodeblock %}
+```
 
 # 2 智能合约代码编写和部署
 
@@ -97,13 +94,13 @@ tags: 手把手教你玩eos
 
 打开cardgame.hpp文件：
 
-{% codeblock lang:Bash %}
+```Bash
 	vi cardgame.hpp
-{% endcodeblock %}
+```
 
 编辑代码，最终代码如下：
 
-{% codeblock lang:C %}	
+```C	
 	#include <eosiolib/eosio.hpp>
 
 	using namespace std;
@@ -209,17 +206,17 @@ tags: 手把手教你玩eos
 	    void playcard(account_name username, uint8_t player_card_idx);
 	
 	};
-{% endcodeblock %}
+```
 
 打开gameplay.cpp文件：
 
-{% codeblock lang:Bash %}
+```Bash
 	vi gameplay.cpp
-{% endcodeblock %}
+```
 
 编辑代码，最终代码如下：
 
-{% codeblock lang:C %}	
+```C	
 	#include "cardgame.hpp"
 	
 	// Simple Pseudo Random Number Algorithm, randomly pick a number within 0 to n-1
@@ -268,17 +265,17 @@ tags: 手把手教你玩eos
 	  // Remove the card from the deck
 	  deck.erase(deck.begin() + deck_card_idx);
 	}
-{% endcodeblock %}
+```
 
 打开cardgame.cpp文件：
 
-{% codeblock lang:Bash %}
+```Bash
 	vi cardgame.cpp
-{% endcodeblock %}
+```
 
 编辑代码，最终代码如下：
 
-{% codeblock lang:C %}	
+```C	
 	#include "gameplay.cpp"
 
 	void cardgame::login(account_name username) {
@@ -340,7 +337,7 @@ tags: 手把手教你玩eos
 	}
 	
 	EOSIO_ABI(cardgame, (login)(startgame)(playcard))
-{% endcodeblock %}
+```
 
 ## 2.2 部署智能合约覆盖原合约
 
@@ -348,35 +345,35 @@ tags: 手把手教你玩eos
 
 #### 编译wast文件
 
-{% codeblock lang:Bash %}
+```Bash
 	eosiocpp -o cardgame.wast cardgame.cpp
-{% endcodeblock %}
+```
 
 #### 编译abi文件
 
-{% codeblock lang:Bash %}
+```Bash
 	eosiocpp -g cardgame.abi cardgame.cpp
-{% endcodeblock %}
+```
 
 ### 解锁钱包
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos wallet unlock -n gamewallet
-{% endcodeblock %}
+```
 
 命令行显示如下：
 
-{% asset_img eost10-03.png 解锁钱包 %}
+![](/images/eost10-03.png "解锁钱包")
 
 ### 部署智能合约
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos -u https://api-kylin.eosasia.one set contract 123123gogogo /eos-work/contracts/cardgame -p 123123gogogo@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost10-04.png 部署智能合约 %}
+![](/images/eost10-04.png "部署智能合约")
 
 至此，后端的合约重新部署完成。
 
@@ -387,7 +384,7 @@ tags: 手把手教你玩eos
 由于时间和篇幅关系，在这里只是下载代码，就不把代码贴出来一一解读了。
 建议读者最好挨个下载，然后逐一查看代码逻辑。
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/frontend/src/components/Game/components/	
 
 	svn checkout https://github.com/EOSIO/eosio-card-game-repo/branches/lesson-4/frontend/src/components/Game/components/Card
@@ -399,17 +396,17 @@ tags: 手把手教你玩eos
 	svn checkout https://github.com/EOSIO/eosio-card-game-repo/branches/lesson-4/frontend/src/components/Game/components/HandCards
 
 	svn checkout https://github.com/EOSIO/eosio-card-game-repo/branches/lesson-4/frontend/src/components/Game/components/PlayerInfo
-{% endcodeblock %}
+```
 
 ## 3.2 整合组件
 
-{% codeblock lang:Bash %}
+```Bash
 	vi index.js
-{% endcodeblock %}
+```
 
 更新代码如下：
 
-{% codeblock lang:C %}		
+```C		
 	import Card from './Card';
 	import GameInfo from './GameInfo';
 	import GameMat from './GameMat';
@@ -425,19 +422,19 @@ tags: 手把手教你玩eos
 	  PlayerInfo,
 	  PlayerProfile,
 	}
-{% endcodeblock %}
+```
 
 返回上一级，编辑Game.jsx
 
-{% codeblock lang:Bash %}
+```Bash
 	cd ..
 
 	vi Game.jsx
-{% endcodeblock %}
+```
 
 更新代码如下:
 
-{% codeblock lang:C %}	
+```C	
 	// React core
 	import React, { Component } from 'react';
 	import { connect } from 'react-redux';
@@ -552,19 +549,19 @@ tags: 手把手教你玩eos
 	
 	// Export a redux connected component
 	export default connect(mapStateToProps, mapDispatchToProps)(Game);
-{% endcodeblock %}
+```
 
 ## 3.3 编辑与区块链交互的ApiService.js
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/frontend/src/services/
      
 	vi ApiService.js
-{% endcodeblock %}
+```
 
 修改代码如下:
 
-{% codeblock lang:C %}	
+```C	
 	import { Api, Rpc, SignatureProvider } from 'eosjs';
 
 	// Main action call to blockchain
@@ -659,26 +656,26 @@ tags: 手把手教你玩eos
 	}
 
 	export default ApiService;
-{% endcodeblock %}
+```
 	
 # 4 测试代码
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/frontend
 
 	npm start
-{% endcodeblock %}
+```
 
 
 在浏览器中输入网址测试。
 
 我新建了一个账户cardgame2333，登录游戏。
 
-{% asset_img eost10-05.png 登录游戏 %} 
+![](/images/eost10-05.png "登录游戏") 
 
 进入游戏。
 
-{% asset_img eost10-06.png 进入游戏 %}	
+![](/images/eost10-06.png "进入游戏")	
 
 # 4 后记
 ## 延伸阅读
@@ -686,5 +683,7 @@ tags: 手把手教你玩eos
 
 - EOS官方游戏开发第四课: https://battles.eos.io/tutorial/lesson4/chapter1	
 
-# 下一篇：<a href="https://blog.eoswing.io/2018/11/26/eos-tutorial-11/" target="_blank">（十一）卡牌游戏第五课：AI部分</a>
+## 请投票给柚翼节点
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。
 
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-11.md" target="_blank">（十一）卡牌游戏第五课：AI部分</a>

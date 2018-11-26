@@ -1,12 +1,9 @@
----
-layout: '[layout]'
-title: （三）使用智能合约创建和发放代币
-date: 2018-09-27 09:13:02
-tags: 手把手教你玩eos
----
+
+（三）使用智能合约创建和发放代币
+===================================
 
 # 手把手教你玩eos
-> 我是此系列教程作者，eoswing团队肖南飞,区块链技术开发人员。
+> 我是此系列教程作者，<a href="https://www.eoswing.io" >eoswing团队</a>肖南飞,区块链技术开发人员。
 
 # 0.引言
 ## 0.1教程概况
@@ -35,7 +32,7 @@ tags: 手把手教你玩eos
 # 1.理解相关概念
 ## 1.1 智能合约概念
 简单地说，**智能合约就是传统合约的数字化版本**。
-{% asset_img eost03-00.png 智能合约概念 %}
+![智能合约概念](/images/eost03-00.png "智能合约概念")
 
 智能合约是运行在计算机里面的，用于保证让参与方执行承诺的代码。它们是在区块链数据库上运行的计算机程序，可以在满足其源代码中写入的条件时自行执行。智能合约一旦编写好就可以被用户信赖，合约条款不能被改变，因此合约是不可更改的。
 
@@ -50,110 +47,110 @@ EOSIO智能合约是在区块链上注册并在EOSIO节点上执行的软件。�
 > 如果xiao钱包没有解锁，请先解锁。
 
 ### 生成公钥-私钥对
-{% codeblock lang:Bash %}
+```Bash
     cleos create key
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost03-01.png 生成秘钥 %}
+![生成秘钥](/images/eost03-01.png "生成秘钥")
 
 > 为简化操作，这里只生成了一对公钥-私钥对。对合约用账户eos.toekn的owner权限和active权限都使用同一个公钥-私钥对。
 
 ### xiao钱包导入公钥-私钥对
-{% codeblock lang:Bash %}
+```Bash
 	cleos wallet import -n xiao --private-key 5JitNtAj18S3q31L3XpEVmd1aPeNo35TWDk3SqTkwzAo9xxPxg7
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost03-02.png 导入钥对 %}
+![导入钥对](/images/eost03-02.png "导入钥对")
 
 ### 创建eos.token账户
-{% codeblock lang:Bash %}
+```Bash
 	cleos create account eosio eosio.token EOS6PLbqkWQey7JSeoS9GXAwdp2Nu7o3rKCiaFEpA92Luhzkiixrm EOS6PLbqkWQey7JSeoS9GXAwdp2Nu7o3rKCiaFEpA92Luhzkiixrm
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost03-03.png 导入钥对 %}
+![导入钥对](/images/eost03-03.png "导入钥对")
 
 ## 2.2 eos.token导入智能合约
 eos系统自带有eosio.token合约。此合约允许创建许多不同的令牌。  
 合约位置为 /contracts/eosio.token
 
 ### 导入智能合约
-{% codeblock lang:Bash %}
+```Bash
 	cleos set contract eosio.token /contracts/eosio.token -p eosio.token@active
-{% endcodeblock %}
+```
 
 命令行输出如下:
-{% asset_img eost03-04.png 导入合约 %}
+![导入合约](/images/eost03-04.png "导入合约")
 
 ### eosio.token支持的命令接口
 
 查看下abi文件：
-{% codeblock lang:Bash %}
+```Bash
 	cat /contracts/eosio.token/eosio.token.abi
-{% endcodeblock %}
+```
 
 可以在输出中看到actions：
-{% asset_img eost03-0402.png 接口定义 %}
+![接口定义](/images/eost03-0402.png "接口定义")
 
 其中，create是创建代币（或者是令牌、token等不同叫法），issue是发放代币，而transfer是账户转帐。
 
 # 3 创建、发放代币和账户转账
 ## 3.1 创建代币
 先实现1个亿的小目标吧，我们创建1亿个EOS的代币：
-{% codeblock lang:Bash %}
+```Bash
 	cleos push action eosio.token create '[ "eosio", "100000000.0000 EOS"]' -p eosio.token@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost03-05.png 创建代币 %}
+![创建代币](/images/eost03-05.png "创建代币")
 
 ## 3.2 发放代币
 给xiaoaccount帐户发放100个EOS:
-{% codeblock lang:Bash %}
+```Bash
 	cleos push action eosio.token issue '[ "xiaoaccount", "100.0000 EOS", "memo" ]' -p eosio@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost03-06.png 发放代币 %}
+![发放代币](/images/eost03-06.png "发放代币")
 
 查看下xiaoaccount现在的资产：
-{% codeblock lang:Bash %}
+```Bash
 	cleos get currency balance eosio.token xiaoaccount
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost03-07.png xiao代币资产 %}
+![xiao代币资产](/images/eost03-07.png "xiao代币资产")
 
 可以看到，xiaoaccount已经收到了100个EOS。
 
 ## 3.3 账户转账
 现在xiaoaccount给eosio账户转账25个EOS:
-{% codeblock lang:Bash %}
+```Bash
 	cleos push action eosio.token transfer '[ "xiaoaccount", "eosio", "25.0000 EOS", "m" ]' -p xiaoaccount@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost03-08.png 账户转账 %}
+![账户转账](/images/eost03-08.png "账户转账")
 
 查看下eosio现在的资产：
-{% codeblock lang:Bash %}
+```Bash
 	cleos get currency balance eosio.token eosio
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost03-10.png xiao代币资产2 %}
+![xiao代币资产1](/images/eost03-10.png "xiao代币资产1")
 
 可以看到，eosio账户上已经有25个EOS。
 
 再查看下xiaoaccount现在的资产：
-{% codeblock lang:Bash %}
+```Bash
 	cleos get currency balance eosio.token xiaoaccount
-{% endcodeblock %}
+```
 
 命令行输出如下：
-{% asset_img eost03-09.png xiao代币资产2 %}
+![xiao代币资产2](/images/eost03-09.png "xiao代币资产2")
 
 可以看到，xiaoaccount账户上已经扣除了25个EOS，只有75个EOS。
 账户转账成功。
@@ -164,4 +161,7 @@ eos系统自带有eosio.token合约。此合约允许创建许多不同的令牌
 
 - EOSIO令牌合同简介: https://developers.eos.io/eosio-cpp/docs/token-tutorial
 
-# 下一篇：<a href="https://blog.eoswing.io/2018/10/08/eos-tutorial-04/" target="_blank">（四）编写第一个智能合约Hello_eos</a>
+## 请投票给柚翼节点
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。
+
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-04.md" target="_blank">（四）编写第一个智能合约Hello_eos</a>

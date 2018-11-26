@@ -1,12 +1,9 @@
----
-layout: '[layout]'
-title: （四）编写第一个智能合约Hello_eos
-date: 2018-10-08 21:56:02
-tags: 手把手教你玩eos
----
+
+（四）编写第一个智能合约Hello_eos
+===================================
 
 # 手把手教你玩eos 
-> 我是此系列教程作者，eoswing团队肖南飞,区块链技术开发人员。
+> 我是此系列教程作者，<a href="https://www.eoswing.io" >eoswing团队</a>肖南飞,区块链技术开发人员。
 
 # 0.引言
 ## 0.1教程概况
@@ -80,16 +77,16 @@ EOSIO支持两种基本通信模型，内联(Inline)和延迟(Deferred)。
 
 先后输入如下命令：
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /contracts
 	eosiocpp -n hello_eos
 	cd hello_eos
 	ll
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost04-01.png 创建目录框架 %}
+![创建目录框架](/images/eost04-01.png "创建目录框架")
 
 ### cpp和hpp文件
 可以看到，在hello_eos文件夹中已经自动生成了两个文件hello_eos.hpp和hello_eos.cpp。
@@ -104,13 +101,13 @@ eosiocpp生成的hello_eos.cpp文件里已经生成了一些模板内容。
 下面我们修改其中打印语句。  
 将 print("Hello, ",name{user});修改为print("Hello,eosfans: ",name{user});
 
-{% codeblock lang:Bash %}
+```Bash
 	vi hello_eos.cpp
-{% endcodeblock %}
+```
 
 输入i进行编辑，编辑后的hello_eos.cpp文件内容如下：
 
-{% asset_img eost04-02.png  cpp文件内容 %}
+![cpp文件内容](/images/eost04-02.png  "cpp文件内容")
 
 按esc键退出编辑模式后，输入 :wq 后保存退出。
 
@@ -122,75 +119,75 @@ eosiocpp生成的hello_eos.cpp文件里已经生成了一些模板内容。
 
 wast文件是WASM适用的由cpp文件编译后的文件格式，这是区块链接收的唯一格式。
 
-{% codeblock lang:Bash %}
+```Bash
 	eosiocpp -o /contracts/hello_eos/hello_eos.wast /contracts/hello_eos/hello_eos.cpp
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost04-03.png  编译wast文件  %}
+![编译wast文件](/images/eost04-03.png  "编译wast文件 ")
 
 ## 3.2 编译abi文件
 abi是一个json格式的，用来描述智能合约如何在action和二进制程序中进行转变的方法，也用来描述数据库状态。有了abi来描述你的智能合约，开发者和用户都可以通过JSON无缝地与合约进行交互。
 
-{% codeblock lang:Bash %}
+```Bash
 	eosiocpp -g /contracts/hello_eos/hello_eos.abi /contracts/hello_eos/hello_eos.cpp
-{% endcodeblock %}
+```
 	
 命令行输出如下：
 
-{% asset_img eost04-04.png  编译abi文件 %}
+![编译abi文件](/images/eost04-04.png  "编译abi文件")
 
 查看hello_eos目录
 
-{% asset_img eost04-05.png 查看hello_eos目录 %}
+![查看hello_eos目录](/images/eost04-05.png "查看hello_eos目录")
 
 ## 3.3 创建helloaccount账户
 
 创建公钥私钥对：
-{% asset_img eost04-06.png  创建公钥秘钥对 %}
+![创建公钥秘钥对](/images/eost04-06.png  "创建公钥秘钥对")
 
 添加秘钥到xiao钱包：
 
-{% asset_img eost04-07.png  添加秘钥到xiao钱包 %}
+![添加秘钥到xiao钱包](/images/eost04-07.png  "添加秘钥到xiao钱包")
 
 建立helloaccount账户：
 
-{% asset_img eost04-08.png  建立helloaccount账户 %}
+![建立helloaccount账户](/images/eost04-08.png  "建立helloaccount账户")
 
 > 以上相关命令，可以查看第3篇的 2.1 创建合约用账户 
 
 ## 3.4 上传合同到账户
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos set contract helloaccount /contracts/hello_eos -p helloaccount@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost04-09.png  上传合同到账户 %}
+![上传合同到账户](/images/eost04-09.png  "上传合同到账户")
 
 ## 3.5 运行合同
 
 输入一个模拟用户名 xiao 使用 helloaccount签名授权，测试通过。
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos push action helloaccount hi '["hello"]' -p helloaccount@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost04-10.png  上传合同到账户 %}
+![上传合同到账户](/images/eost04-10.png  "上传合同到账户")
 
 输入一个模拟用户名 xiao 使用 xiaoaccount签名授权，测试通过。
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos push action helloaccount hi '["hello"]' -p xiaoaccount@active
-{% endcodeblock %}
+```
 	
 命令行输出如下：
 
-{% asset_img eost04-11.png  上传合同到账户 %}
+![上传合同到账户](/images/eost04-11.png  "上传合同到账户")
 
 目前我们的hello_eos合约是不限制hi参数的，也就是说其实我们是没有“xiao”这个签名人的。
 现在无论这个参数如何输入账户名，无论用哪个账户签名授权，都可以输出。
@@ -201,13 +198,13 @@ abi是一个json格式的，用来描述智能合约如何在action和二进制�
 ## 4.1 修改cpp文件
 在hello_eos.cpp文件中添加 require_auth(user); 这段代码：
 
-{% asset_img eost04-12.png 修改cpp文件 %}
+![修改cpp文件](/images/eost04-12.png "修改cpp文件")
 
 ## 4.2 重新编译和部署合同
 
 重复上述编译和部署过程。全部命令行输出如下：
 
-{% asset_img eost04-13.png  编译和部署 %}
+![编译和部署](/images/eost04-13.png  "编译和部署")
 
 ## 4.3 再次运行合同
 
@@ -219,7 +216,7 @@ abi是一个json格式的，用来描述智能合约如何在action和二进制�
 
 命令行输出如下：
 
-{% asset_img eost04-14.png  再次运行合同 %}
+![再次运行合同](/images/eost04-14.png  "再次运行合同")
 
 hello_eos的身份验证生效。
 
@@ -229,4 +226,7 @@ hello_eos的身份验证生效。
 
 - Hello World合同: https://developers.eos.io/eosio-cpp/docs/hello-world
 
-# 下一篇：<a href="https://blog.eoswing.io/2018/10/15/eos-tutorial-05/" target="_blank">（五）编写智能合约游戏：三连棋</a>
+## 请投票给柚翼节点
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。
+
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-05.md" target="_blank">（五）编写智能合约游戏：三连棋</a>

@@ -1,12 +1,9 @@
----
-layout: '[layout]'
-title: （五）编写智能合约游戏：三连棋
-date: 2018-10-15 17:03:02
-tags: 手把手教你玩eos
----
+
+（五）编写智能合约游戏：三连棋
+===================================
 
 # 手把手教你玩eos 
-> 我是此系列教程作者，eoswing团队肖南飞,区块链技术开发人员。
+> 我是此系列教程作者，<a href="https://www.eoswing.io" >eoswing团队</a>肖南飞,区块链技术开发人员。
 
 # 0.引言
 ## 0.1教程概况
@@ -36,7 +33,7 @@ tags: 手把手教你玩eos
 
 三连棋，又称“井字棋”，是棋类的一种，棋盘为九宫格，呈“井”字形，玩家双方各代表○或×，在棋盘上任意一方连成三个（横竖斜均可）就胜利了。
 
-{% asset_img eost05-01.png 三连棋游戏规则 %}
+![](/images/eost05-01.png "三连棋游戏规则")
 
 ## 1.2 Multi-Index
 
@@ -44,7 +41,7 @@ Multi-Index是eosio上的数据库管理接口，通过eosio::multi_index智能�
  
 一个完整的multi_index表定义如下：
 
-{% codeblock lang:C %}
+```C
 	struct limit_order {
 		uint64_t     id;
 		uint128_t    price;
@@ -57,22 +54,22 @@ Multi-Index是eosio上的数据库管理接口，通过eosio::multi_index智能�
 
 		EOSLIB_SERIALIZE( limit_order, ( id )( price )( expiration )( owner ) )
 	};
-{% endcodeblock %}
+```
 
 ## 1.3 建立项目框架
 
 使用eosiocpp建立项目框架：
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /contracts
 	eosiocpp -n tictactoe
 	cd tictactoe
 	ll
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost05-03.png 创建目录框架 %}
+![](/images/eost05-03.png "创建目录框架")
 
 # 2 编写智能合约
 
@@ -80,7 +77,7 @@ Multi-Index是eosio上的数据库管理接口，通过eosio::multi_index智能�
 
 引入标准库，编写基本结构
 
-{% codeblock lang:C %}
+```C
 	#include <eosiolib/eosio.hpp>
 
 	class tictactoe : public eosio::contract {
@@ -93,11 +90,11 @@ Multi-Index是eosio上的数据库管理接口，通过eosio::multi_index智能�
 		//...游戏命令定义...
 		
 	};
-{% endcodeblock %}
+```
 	
 游戏数据定义，参看1.2 Multi-Index。
 
-{% codeblock lang:C %}
+```C
 	struct game {
          static const uint16_t board_width = 3;
          static const uint16_t board_height = 3;
@@ -127,11 +124,11 @@ Multi-Index是eosio上的数据库管理接口，通过eosio::multi_index智能�
       };
 
 	typedef eosio::multi_index< N(games), game> games;
-{% endcodeblock %}
+```
 
 游戏命令定义
 
-{% codeblock lang:C %}	
+```C	
 	/// @abi action
     /// 创建新游戏
     void create(const account_name& challenger, const account_name& host);
@@ -147,7 +144,7 @@ Multi-Index是eosio上的数据库管理接口，通过eosio::multi_index智能�
     /// @abi action
     /// 下棋
     void move(const account_name& challenger, const account_name& host, const account_name& by, const uint16_t& row, const uint16_t& column);
-{% endcodeblock %}
+```
     
 hpp的完整源文件可以查看官方的github代码库:
 
@@ -159,15 +156,15 @@ hpp的完整源文件可以查看官方的github代码库:
 
 编写基本结构
 
-{% codeblock lang:C %}		
+```C		
 	#include "tictactoe.hpp"
 
 	using namespace eosio;
-{% endcodeblock %}
+```
 
 创建新游戏：
 
-{% codeblock lang:C %}		
+```C		
 	void tictactoe::create(const account_name& challenger, const account_name& host) {
    		
 		//验证主角签名
@@ -188,11 +185,11 @@ hpp的完整源文件可以查看官方的github代码库:
       		g.turn = host;
 		});
 	}
-{% endcodeblock %}
+```
 
 重新开始游戏：
 
-{% codeblock lang:C %}	
+```C	
 	void tictactoe::restart(const account_name& challenger, const account_name& host, const account_name& by) {
 
 		//验证请求者签名
@@ -211,11 +208,11 @@ hpp的完整源文件可以查看官方的github代码库:
       		g.reset_game();
 		});
 	}
-{% endcodeblock %}
+```
 
 结束游戏：
 
-{% codeblock lang:C %}
+```C
 	void tictactoe::close(const account_name& challenger, const account_name& host) {
 	  
 		//验证主角签名
@@ -229,11 +226,11 @@ hpp的完整源文件可以查看官方的github代码库:
 	   //删除游戏
 	   existing_host_games.erase(itr);
 	}
-{% endcodeblock %}
+```
 
 下棋：
 
-{% codeblock lang:C %}
+```C
 	void tictactoe::move(const account_name& challenger, const account_name& host, const account_name& by, const uint16_t& row, const uint16_t& column ) {
 
 	   //验证请求者签名
@@ -269,11 +266,11 @@ hpp的完整源文件可以查看官方的github代码库:
 	      g.winner = get_winner(g);
 	   });
 	}	
-{% endcodeblock %}
+```
 
 下棋步数有效验证方法is_valid_movement
 
-{% codeblock lang:C %}
+```C
 	bool is_empty_cell(const uint8_t& cell) {
 	   return cell == 0;
 	}
@@ -283,12 +280,12 @@ hpp的完整源文件可以查看官方的github代码库:
 	   bool is_valid = movement_location < board.size() && is_empty_cell(board[movement_location]);
 	   return is_valid;
 	}
-{% endcodeblock %}
+```
 
 赢家验证  
 *游戏规则：在横向、纵向和对角线任意一个方向上连线三点就赢得比赛。*
 
-{% codeblock lang:C %}
+```C
 	account_name get_winner(const tictactoe::game& current_game) {
 	   auto& board = current_game.board;
 	
@@ -333,7 +330,7 @@ hpp的完整源文件可以查看官方的github代码库:
 	   // 检查是否已有赢家，有就返回
 	   return is_board_full ? N(draw) : N(none);
 	}
-{% endcodeblock %}
+```
    
 cpp的完整源文件可以查看官方的github代码库:
 
@@ -345,15 +342,15 @@ cpp的完整源文件可以查看官方的github代码库:
 
 ## 3.1 编译合约
 
-{% codeblock lang:Bash %}	
+```Bash	
 	eosiocpp -o tictactoe.wast tictactoe.cpp
 	eosiocpp -g tictactoe.abi tictactoe.cpp
 	ll
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost05-06.png 编译合约 %}
+![](/images/eost05-06.png "编译合约")
 
 ## 3.2 创建合约账户tttaccount
 
@@ -362,72 +359,72 @@ cpp的完整源文件可以查看官方的github代码库:
  
 tttaccount创建后命令行输出如下:
 
-{% asset_img eost05-02.png 创建合约账户tttaccount %}
+![](/images/eost05-02.png "创建合约账户tttaccount")
 
 ## 3.3 上传合同到账户
 
-{% codeblock lang:Bash %}	
+```Bash	
 	cleos set contract tttaccount /contracts/tictactoe -p tttaccount@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost05-07.png 上传合同到账户 %}
+![](/images/eost05-07.png "上传合同到账户")
 
 ## 3.4 运行智能合约
 
 创建游戏
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos push action tttaccount create '{"challenger":"xiaoaccount", "host":"tttaccount"}' -p tttaccount@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost05-08.png 创建游戏 %}
+![](/images/eost05-08.png "创建游戏")
 
 
 下棋
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos push action tttaccount move '{"challenger":"xiaoaccount", "host":"tttaccount", "by":"tttaccount", "row":0, "column":0}' --permission tttaccount@active
 	
 	cleos push action tttaccount move '{"challenger":"xiaoaccount", "host":"tttaccount", "by":"xiaoaccount", "row":1, "column":1}' --permission xiaoaccount@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost05-09.png 下棋 %}
+![](/images/eost05-09.png "下棋")
 
 查看游戏状态数据：
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos get table tttaccount tttaccount games
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost05-12.png 查看游戏状态数据 %}
+![](/images/eost05-12.png "查看游戏状态数据")
 
 重新开始游戏
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos push action tttaccount restart '{"challenger":"xiaoaccount", "host":"tttaccount", "by":"tttaccount"}' --permission tttaccount@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost05-10.png 重新开始游戏 %}
+![](/images/eost05-10.png "重新开始游戏")
 
 结束游戏
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos push action tttaccount close '{"challenger":"xiaoaccount", "host":"tttaccount"}' --permission tttaccount@active
-{% endcodeblock %}
+```
 
 命令行输出如下：
 
-{% asset_img eost05-11.png 结束游戏 %}
+![](/images/eost05-11.png "结束游戏")
 
 # 5 后记
 ## 延伸阅读
@@ -435,5 +432,7 @@ tttaccount创建后命令行输出如下:
 
 - 三连棋教程: https://developers.eos.io/eosio-cpp/docs/tic-tac-toe-tutorial
 
-# 下一篇：<a href="https://blog.eoswing.io/2018/10/23/eos-tutorial-06/" target="_blank">（六）架设EOS区块浏览器</a>
+## 请投票给柚翼节点
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。
 
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-06.md" target="_blank">（六）架设EOS区块浏览器</a>

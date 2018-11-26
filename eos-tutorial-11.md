@@ -1,12 +1,9 @@
----
-layout: '[layout]'
-title: （十一）卡牌游戏第五课：AI部分
-date: 2018-11-26 21:10:02
-tags: 手把手教你玩eos
----
+
+（十一）卡牌游戏第五课：AI部分
+===================================
 
 # 手把手教你玩eos 
-> 我是此系列教程作者，eoswing团队肖南飞,区块链技术开发人员。
+> 我是此系列教程作者，<a href="https://www.eoswing.io" >eoswing团队</a>肖南飞,区块链技术开发人员。
 
 # 0.引言
 ## 0.1教程概况
@@ -361,4 +358,5 @@ AI Loss Prevention 最大程度减少自己伤害。 强调确保最大限度的
 
 - EOS官方游戏开发第五课: https://battles.eos.io/tutorial/lesson5/chapter1	
 
-	
+## 请投票给柚翼节点
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。	
