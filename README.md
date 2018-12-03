@@ -58,6 +58,8 @@
 
 ##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-11.md" target="_blank">（十一）卡牌游戏第五课：AI部分</a>
 
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-12.md" target="_blank">（十二）卡牌游戏第六课：战斗部分</a>
+
 持续更新中...
 
 # 2.开篇絮语

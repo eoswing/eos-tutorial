@@ -59,7 +59,7 @@ AI Best Card Win 最大程度争取获胜。 强调选择一张最有可能获�
 
 具体算法如下图所示：
 
-{% asset_img eost11-01.png 策略1解读 %}
+![策略1解读](/images/eost11-01.png "策略1解读")
 
 
 ### 策略2解读
@@ -74,7 +74,7 @@ AI Minimize Losses 最大程度防止失败。 强调选择失败率最低的卡
 
 具体算法如下图所示：
 
-{% asset_img eost11-02.png 策略2解读 %}
+![策略2解读](/images/eost11-02.png "策略2解读")
 
 ### 策略3解读
 
@@ -86,7 +86,7 @@ AI Points Tally 最大程度伤害对手。 强调选择造成最大伤害的牌
 
 具体算法如下图所示：
 
-{% asset_img eost11-03.png 策略3解读 %}
+![策略3解读](/images/eost11-03.png "策略3解读")
 
 ### 策略4解读
 
@@ -102,21 +102,21 @@ AI Loss Prevention 最大程度减少自己伤害。 强调确保最大限度的
 
 具体算法如下图所示：
 
-{% asset_img eost11-04.png 策略4解读 %}
+![策略4解读](/images/eost11-04.png "策略4解读")
 
 ## 1.3 准备工作
 
 ### 进入开发环境容器
 
-{% codeblock lang:Bash %}
+```Bash
 	docker exec -it eosdev /bin/bash
-{% endcodeblock %}	
+```
 
 ### 进入后端智能合约文件夹
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/contracts/cardgame
-{% endcodeblock %}
+```
 
 # 2 智能合约代码编写和部署
 
@@ -124,13 +124,13 @@ AI Loss Prevention 最大程度减少自己伤害。 强调确保最大限度的
 
 打开cardgame.hpp文件：
 
-{% codeblock lang:Bash %}
+```Bash
 	vi cardgame.hpp
-{% endcodeblock %}
+```
 
 编辑代码，添加代码如下：
 
-{% codeblock lang:C %}	
+```C	
 	void draw_one_card(vector<uint8_t>& deck, vector<uint8_t>& hand);
 	//在上面代码行后添加如下代码
 	//===下面为添加代码===
@@ -151,17 +151,17 @@ AI Loss Prevention 最大程度减少自己伤害。 强调确保最大限度的
     int ai_choose_card(const game& game_data);
 
 	//======
-{% endcodeblock %}
+```
 
 打开gameplay.cpp文件：
 
-{% codeblock lang:Bash %}
+```Bash
 	vi gameplay.cpp
-{% endcodeblock %}
+```
 
 编辑代码，在代码行的最后面添加代码如下：
 
-{% codeblock lang:C %}	
+```C	
 	//在代码行的最后添加如下代码
 
 	// Calculate the final attack point of a card after taking the elemental bonus into account
@@ -265,17 +265,17 @@ AI Loss Prevention 最大程度减少自己伤害。 强调确保最大限度的
 	  }
 	  return chosen_card_idx;
 	}
-{% endcodeblock %}
+```
 
 打开cardgame.cpp文件：
 
-{% codeblock lang:Bash %}
+```Bash
 	vi cardgame.cpp
-{% endcodeblock %}
+```
 
 编辑代码，添加代码如下：
 
-{% codeblock lang:C %}	
+```C	
 	game_data.hand_player[player_card_idx] = 0;
 	//在上面代码行后添加如下代码
 	//===下面为添加代码===
@@ -284,7 +284,7 @@ AI Loss Prevention 最大程度减少自己伤害。 强调确保最大限度的
     int ai_card_idx = ai_choose_card(game_data);
     game_data.selected_card_ai = game_data.hand_ai[ai_card_idx];
     game_data.hand_ai[ai_card_idx] = 0;
-{% endcodeblock %}
+```
 
 ## 2.2 部署智能合约覆盖原合约
 
@@ -292,37 +292,37 @@ AI Loss Prevention 最大程度减少自己伤害。 强调确保最大限度的
 
 #### 编译wast文件
 
-{% codeblock lang:Bash %}
+```Bash
 	eosiocpp -o cardgame.wast cardgame.cpp
-{% endcodeblock %}	
+```
 
 #### 编译abi文件
 
-{% codeblock lang:Bash %}
+```Bash
 	eosiocpp -g cardgame.abi cardgame.cpp
-{% endcodeblock %}
+```
 
 ### 解锁钱包
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos wallet unlock -n gamewallet
-{% endcodeblock %}
+```
 
 ### 部署智能合约
 
-{% codeblock lang:Bash %}
+```Bash
 	cleos -u https://api-kylin.eosasia.one set contract 123123gogogo /eos-work/contracts/cardgame -p 123123gogogo@active
-{% endcodeblock %}
+```
 
 至此，后端的合约重新部署完成。
 
 # 3 测试代码
 
-{% codeblock lang:Bash %}
+```Bash
 	cd /eos-work/frontend
 
 	npm start
-{% endcodeblock %}
+```
 
 在浏览器中输入网址测试。
 
@@ -335,22 +335,22 @@ AI Loss Prevention 最大程度减少自己伤害。 强调确保最大限度的
 
 登录游戏。
 
-{% asset_img eost11-05.png 登录游戏 %}	  
+![登录游戏](/images/eost11-05.png "登录游戏")	  
 
 
 进入游戏。
 
-{% asset_img eost11-06.png 进入游戏 %}
+![进入游戏](/images/eost11-06.png "进入游戏")	
 
 
 开始游戏。
 
-{% asset_img eost11-07.png 开始游戏 %}	
+![开始游戏](/images/eost11-07.png "开始游戏")		
 
 
 出牌，同时AI出牌。
 
-{% asset_img eost11-08.png 出牌 %}
+![出牌](/images/eost11-08.png "出牌")
 
 # 4 后记
 ## 延伸阅读
@@ -360,3 +360,5 @@ AI Loss Prevention 最大程度减少自己伤害。 强调确保最大限度的
 
 ## 请投票给柚翼节点
 如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。	
+
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-12.md" target="_blank">（十二）卡牌游戏第六课：战斗部分</a>
