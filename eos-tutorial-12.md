@@ -400,5 +400,16 @@
 
 此次，我没有清空上节课程的账号缓存，所以输入网址后直接跳转到对战界面。
 
-![对战界面](/images/eost12-03.png "对战界面")	
+![对战界面](/images/eost12-03.png "对战界面")
+
+# 5 后记
+## 延伸阅读
+在本文的学习中如果遇到问题，欢迎留言或者在如下链接寻找解决方案：
+
+- EOS官方游戏开发第六课: https://battles.eos.io/tutorial/lesson6/chapter1
+
+## 请投票给柚翼节点
+如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。	
+
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-13.md" target="_blank">（十三）卡牌游戏第七课：完善游戏流程</a>	
 
