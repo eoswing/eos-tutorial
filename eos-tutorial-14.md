@@ -65,7 +65,7 @@
 
 更新代码如下：
 
-{% codeblock lang:C %}	
+```C	
 	import React, { Component } from 'react';
 	// Components
 	import { Button } from 'components';
@@ -106,7 +106,7 @@
 
 编辑代码如下:
 
-{% codeblock lang:C %}	
+```C	
 	import React, { Component } from 'react';
 
 	class Button extends Component {
@@ -179,7 +179,7 @@
 
 编辑代码如下:
 
-{% codeblock lang:C %}	
+```C	
 	// React core
 	import React, { Component } from 'react';
 	import { connect } from 'react-redux';
@@ -377,7 +377,7 @@
 
 更新代码如下：
 
-{% codeblock lang:C %}	
+```C	
 	import React, { Component } from 'react';
 	import { connect } from 'react-redux';
 	// Components
@@ -522,7 +522,7 @@
 ```
 更新代码如下：
 
-{% codeblock lang:C %}	
+```C	
 	// React core
 	import React, { Component } from 'react';
 	import { connect } from 'react-redux';
