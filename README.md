@@ -62,6 +62,8 @@
 
 ##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-13.md" target="_blank">（十三）卡牌游戏第七课：完善游戏流程</a>
 
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-14.md" target="_blank">（十四）卡牌游戏第八课：优化细节体验</a>	
+
 持续更新中...
 
 # 2.开篇絮语
