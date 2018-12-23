@@ -64,6 +64,10 @@
 
 ##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-14.md" target="_blank">（十四）卡牌游戏第八课：优化细节体验</a>	
 
+## 1.3 神兵利器---EOSFactory框架开发篇
+
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-15.md" target="_blank">（十五）配置windows10下的EOSFactory开发测试框架</a>	
+
 持续更新中...
 
 # 2.开篇絮语
