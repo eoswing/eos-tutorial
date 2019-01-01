@@ -66,7 +66,9 @@
 
 ## 1.3 神兵利器---EOSFactory框架开发篇
 
-##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-15.md" target="_blank">（十五）配置windows10下的EOSFactory开发测试框架</a>	
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-15.md" target="_blank">（十五）配置windows10下的EOSFactory开发测试框架</a>
+
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-16.md" target="_blank">（十六）使用EOSFactory与EOS交互</a>		
 
 持续更新中...
 
