@@ -304,3 +304,5 @@ info()查看，没有就reset()启动一个。
 
 ## 请投票给柚翼节点
 如果觉得这系列教程有点意思，<a href="https://www.myeoskit.com/tools/vote/?voteTo=eoswingdotio" >请投票给柚翼节点（eoswingdotio）</a>。您的投票是本教程持续更新的动力源泉，谢谢。
+
+# 下一篇：<a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-17.md" target="_blank">（十七）使用EOSFactory构建和部署智能合约</a>	

@@ -68,7 +68,9 @@
 
 ##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-15.md" target="_blank">（十五）配置windows10下的EOSFactory开发测试框架</a>
 
-##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-16.md" target="_blank">（十六）使用EOSFactory与EOS交互</a>		
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-16.md" target="_blank">（十六）使用EOSFactory与EOS交互</a>
+
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-17.md" target="_blank">（十七）使用EOSFactory构建和部署智能合约</a>			
 
 持续更新中...
 
