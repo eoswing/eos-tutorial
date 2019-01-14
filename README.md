@@ -72,6 +72,8 @@
 
 ##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-17.md" target="_blank">（十七）使用EOSFactory构建和部署智能合约</a>			
 
+##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-18.md" target="_blank">（十八）Visual Studio Code和EOSFactory的结合使用</a>	
+
 持续更新中...
 
 # 2.开篇絮语
