@@ -76,8 +76,6 @@
 
 ##### <a href="https://github.com/eoswing/eos-tutorial/blob/master/eos-tutorial-19.md" target="_blank">（十九）在公共Testnet上部署和测试智能合约</a>		
 
-持续更新中...
-
 # 2.开篇絮语
 ## 2.1 欢迎读者查漏补缺
 eoswing技术团队致力于EOS区块链基础知识传播。EOS开发涉猎知识领域非常广，同时更新迭代非常快。在教程中可能有这样那样的错漏之处，还请读者与我们一起查漏补缺、将系列教程优化的更好。
